@@ -51,7 +51,9 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       - name: Generate configuration file
-        run: make defconfig
+        run: |
+          cd ./lede
+          make defconfig
 #         run: cp .config ./lede
 
       - name: Make download
