@@ -51,11 +51,10 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       - name: Change configuration file
-        run: |
-          cp .config ./lede
-#         cd ./lede
-#         make defconfig
-          
+        run: |    
+          cd ./lede
+          make defconfig
+#         cp .config ./lede
 
       - name: Make download
         run: |
@@ -104,3 +103,15 @@ jobs:
         with:
           name: OpenWrt_firmware
           path: ./lede/bin/targets/
+
+      - name: Deliver firmware
+        uses: actions/upload-artifact@v2
+        with:
+          name: OpenWrt_firmware
+          path: ./lede/dl/
+          
+      - name: Deliver firmware
+        uses: actions/upload-artifact@v2
+        with:
+          name: OpenWrt_firmware
+          path: ./lede/tmp/
